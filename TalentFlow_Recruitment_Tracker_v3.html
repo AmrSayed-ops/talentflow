@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08080a"><title>TalentFlow | Recruitment Tracker</title>
+<style>
+:root{--bg:#08080a;--card:#111114;--line:rgba(255,255,255,.09);--ink:#f5f5f4;--muted:#8b8b93;--lime:#c4f531}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif}
+.k,.eyebrow,.ft,th{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.06em;text-transform:uppercase}
+.topnav{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:1256px;width:calc(100% - 24px);margin:18px auto 0;padding:10px 20px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.03)}
+.brand{font:italic 22px Georgia,serif}.brand i{color:var(--lime)}
+.links{display:flex;gap:22px;font-size:12px;color:var(--muted)}.links b{color:var(--ink);font-weight:400}.links b::before{content:"•";color:var(--lime);margin-left:6px}
+.demo{font-size:11px;padding:6px 14px;border-radius:999px;background:#fff;color:#000;font-weight:bold}
+main{max-width:1280px;margin:auto;padding:30px 12px 40px;min-width:0}
+.hero{position:relative;display:grid;grid-template-columns:1fr minmax(0,1.7fr) 1fr;gap:20px;align-items:center;text-align:center;padding:26px 0 150px}
+.hero::before{content:"";position:absolute;inset:auto 5% 0;height:300px;background:radial-gradient(ellipse at 50% 100%,rgba(196,245,49,.5),rgba(196,245,49,.08) 55%,transparent 72%);pointer-events:none}
+.hero>*{position:relative}
+.eyebrow{color:var(--lime);font-size:11px}
+h1{font:400 clamp(30px,4.6vw,56px)/1.3 Georgia,"Noto Naskh Arabic","Times New Roman",serif;margin:12px 0}
+h1 em{color:var(--lime);font-style:italic;text-shadow:0 0 28px rgba(196,245,49,.45)}
+.sub{color:var(--muted);font-size:13px;line-height:1.9;max-width:460px;margin:0 auto 20px}
+.stat .n{font:400 46px Georgia,serif;line-height:1}.stat .k{font-size:10px;color:var(--muted);margin:8px 0 34px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+button{border:0;border-radius:999px;padding:10px 18px;font-weight:bold;cursor:pointer;font-family:inherit}
+.primary{background:var(--lime);color:#0a0a0a}.primary:hover{filter:brightness(1.08)}
+.ghost,.secondary{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--ink)}
+.danger{background:rgba(248,113,113,.16);color:#f87171;border:1px solid rgba(248,113,113,.3)}.sm{padding:6px 12px;font-size:11px}
+.floaters{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:-130px 0 22px;position:relative}
+.fc{background:rgba(17,17,20,.93);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 20px 50px #000a}
+.fc.a{transform:rotateZ(1.5deg)}.fc.b{transform:translateY(-14px)}.fc.c{transform:rotateZ(-1.5deg)}
+.ft{font-size:10px;color:var(--muted);margin-bottom:14px}.ft::before{content:"•";color:var(--lime);margin-left:6px}
+.lrow{display:flex;align-items:center;gap:10px;padding:9px 10px;margin-bottom:8px;background:rgba(255,255,255,.04);border-radius:12px;font-size:12px}
+.lrow .ln{flex:1;min-width:0}.lrow small{display:block;color:var(--muted);font-size:10px}
+.av{width:28px;height:28px;border-radius:50%;background:#26262c;display:grid;place-items:center;font-size:11px;font-weight:bold}
+.frow{display:grid;grid-template-columns:80px 1fr 22px;gap:10px;align-items:center;margin:11px 0;font-size:12px}
+.track,.srcbar{height:9px;background:rgba(255,255,255,.07);border-radius:20px;overflow:hidden}
+.bar{height:100%;background:var(--lime);border-radius:20px}
+.src{margin:12px 0;font-size:12px}.src div:first-child{display:flex;justify-content:space-between;margin-bottom:6px}
+.srcbar span{display:block;height:100%;background:var(--lime)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px}.tablepanel{overflow:hidden}
+.muted{font-size:12px;color:var(--muted)}
+.thead{padding:18px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.filters{display:flex;gap:7px;flex-wrap:wrap}
+input,select,textarea{padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#17171b;color:var(--ink);font:12px Tahoma;min-width:125px}
+input::placeholder,textarea::placeholder{color:#6b6b73}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--lime);outline-offset:0}
+input[type=checkbox]{min-width:0;width:16px;height:16px;padding:0;accent-color:#c4f531;cursor:pointer}
+select option{background:#17171b;color:var(--ink)}
+.wrap{overflow:auto}
+table{border-collapse:collapse;width:100%;font-size:12px}
+th,td{text-align:right;padding:10px 7px;vertical-align:middle;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-size:10px;font-weight:400;white-space:nowrap;background:rgba(255,255,255,.02)}
+tbody tr:hover{background:rgba(255,255,255,.03)}
+.person{font-weight:bold}.email{color:var(--muted);font-size:10px;margin-top:4px;overflow-wrap:anywhere}
+td[data-label="رقم الهاتف"],.pill{white-space:nowrap}
+.pill{padding:5px 10px;border-radius:20px;font-size:10px;font-weight:bold;display:inline-block}
+.new{background:rgba(255,255,255,.08);color:#d4d4d8}.screen{background:rgba(251,191,36,.15);color:#fbbf24}.interview,.yes{background:rgba(196,245,49,.15);color:#c4f531}.offer{background:#c4f531;color:#0a0a0a}.rejected,.no{background:rgba(248,113,113,.15);color:#f87171}.hold{background:rgba(255,255,255,.06);color:#a1a1aa}
+.stsel{border-radius:20px;font-weight:bold;border-color:transparent;min-width:0;width:100%;max-width:112px}
+.h-pill,td.c-pill{display:none}
+.note-cell{max-width:130px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#c9c9cf}
+td.c-act button{display:block;width:100%;padding:5px 9px;font-size:11px}td.c-act button+button{margin-top:4px}
+.foot,.note{padding:13px 18px;color:var(--muted);font-size:11px;line-height:1.8}
+.modalback{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:15px;z-index:20}
+.modal{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;width:min(560px,100%);max-height:92vh;overflow:auto}
+.modal h2{font:400 24px Georgia,"Noto Naskh Arabic",serif;margin:0 0 16px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:6px}
+.field input,.field select{width:100%}.field textarea{width:100%;min-height:70px;resize:vertical}.field.full{grid-column:1/-1}
+.modalactions{margin-top:18px;display:flex;gap:8px}
+.toast{display:none;position:fixed;bottom:18px;left:18px;background:var(--lime);color:#0a0a0a;padding:12px 18px;border-radius:999px;font-size:12px;font-weight:bold;z-index:30}
+@media(max-width:900px){.links{display:none}.hero{grid-template-columns:1fr 1fr;padding-bottom:140px}.hero .mid{grid-column:1/-1;order:-1}.floaters{grid-template-columns:1fr;margin-top:-120px}.fc.a,.fc.b,.fc.c{transform:none}}
+@media(max-width:700px){
+main{padding:18px 10px}.actions button{flex:1 1 45%;min-height:44px}.actions .addbtn{flex-basis:100%}
+.stat .n{font-size:36px}.thead{padding:14px}.filters{width:100%}.filters input,.filters select,.filters button{flex:1 1 100%;min-height:42px}
+input,select,textarea{font-size:16px!important}.wrap{overflow:visible}
+table,tbody{display:block;width:100%}thead{display:none}
+tbody tr{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;padding:14px;border-bottom:8px solid var(--bg);position:relative}
+tbody td{display:block;border:0;padding:0;white-space:normal;font-size:13px;min-width:0}
+tbody td[data-label]::before{content:attr(data-label);display:block;font-size:10px;color:var(--muted);margin-bottom:3px}
+tbody td.full{grid-column:1/-1}td.c-chk{position:absolute;left:12px;top:12px}td.c-chk input{width:22px;height:22px}td.c-name{padding-left:34px;font-size:14px}
+td select{width:100%;max-width:none;min-height:38px}.note-cell{max-width:none;display:block}
+td.c-act{display:flex!important;gap:8px}td.c-act button{flex:1;min-height:42px;font-size:13px;margin:0!important}
+.form{grid-template-columns:1fr}.modalback{align-items:flex-start;overflow:auto;padding:10px}.modal{margin:auto 0;max-height:none}
+.modalactions button{flex:1;min-height:44px}.toast{left:10px;right:10px;text-align:center}}
+.frow{grid-template-columns:100px 1fr 22px}.stsel{max-width:135px}a.sm{display:block;text-align:center;text-decoration:none;border-radius:999px;padding:6px 12px;font-size:11px;font-weight:bold;margin-bottom:4px}.wa{background:rgba(37,211,102,.16);color:#25d366;border:1px solid rgba(37,211,102,.3)}.tel{background:rgba(255,255,255,.05);color:var(--ink);border:1px solid var(--line)}@media(max-width:700px){td.c-act{flex-wrap:wrap}td.c-act a{flex:1;min-height:42px;font-size:13px;margin:0;display:grid;place-items:center}#bulkbox select{flex:1 1 100%}}</style></head>
+<body><div class="app"><nav class="topnav"><div class="brand">Talent<i>Flow</i></div><div class="links"><b>المرشحون</b></div><span class="demo">نسخة تجريبية</span></nav>
+<main><section class="hero"><div class="stat"><div class="n" id="total">8</div><div class="k">إجمالي المرشحين</div><div class="n" id="review">3</div><div class="k">قيد المراجعة</div></div>
+<div class="mid"><div class="eyebrow">RECRUITMENT WORKSPACE / DEMO</div><h1>تتبّع مرشحيك <em>أسرع</em> وبكل وضوح.</h1><p class="sub">تتبّع المتقدمين لوظائف الـ Call Center والوظائف المبتدئة: اللغة والعمر والتخرج وحضور المقابلات، مع تواصل بضغطة واتساب.</p>
+<div class="actions"><button class="primary addbtn" onclick="showModal()">＋ إضافة مرشح</button><button class="ghost" onclick="xlsx()">تصدير Excel (.xlsx)</button><button class="ghost" onclick="csv()">تصدير CSV</button><button class="ghost" onclick="document.getElementById('impfile').click()">استيراد من Excel / CSV</button><input type="file" id="impfile" accept=".xlsx,.csv,.txt,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="display:none" onchange="imp(this)"></div></div>
+<div class="stat"><div class="n" id="interviews">2</div><div class="k">في مرحلة المقابلات</div><div class="n" id="offers">1</div><div class="k">تم قبولهم</div></div></section>
+<section class="floaters"><div class="fc a"><div class="ft">آخر المرشحين</div><div id="latest"></div></div><div class="fc b"><div class="ft">مسار المرشحين</div><div id="funnel"></div></div><div class="fc c"><div class="ft">مصادر المرشحين</div><div id="sources"></div></div></section>
+<section class="panel tablepanel"><div class="thead"><div><b>قاعدة بيانات المرشحين</b><div class="muted" style="margin-top:5px">ابحث وصفِّ النتائج وحدّث حالة المرشح.</div></div><div class="filters"><input id="search" placeholder="ابحث بالاسم أو الهاتف أو الوظيفة" oninput="table()"><select id="sf" onchange="table()"></select><select id="rf" onchange="table()"></select><select id="lf" onchange="table()"></select><select id="lvf" onchange="table()"></select><select id="gf" onchange="table()"><option value="">متخرج: الكل</option><option>نعم</option><option>لا</option></select><select id="ef" onchange="table()"><option value="">خبرة: الكل</option><option>نعم</option><option>لا</option></select><input id="amin" type="number" placeholder="عمر من" style="min-width:0;width:90px" oninput="table()"><input id="amax" type="number" placeholder="إلى" style="min-width:0;width:90px" oninput="table()"><button class="ghost sm" onclick="resetF()">مسح الفلاتر</button><span id="bulkbox" style="display:none;gap:7px;flex-wrap:wrap;width:100%"><select id="bulkst"></select><button class="primary sm" onclick="bulkSt()">تغيير حالة المحدد</button><button class="danger sm" id="bulkdel" onclick="delSel()"></button></span></div></div><div class="wrap"><table><thead><tr><th><input type="checkbox" id="selall" onchange="togAll(this.checked)"></th><th>المرشح</th><th>الهاتف</th><th>العمر</th><th>متخرج؟</th><th>خبرة؟</th><th>اللغة</th><th>المنطقة</th><th>الوظيفة</th><th>المصدر</th><th>التقديم</th><th>الحالة</th><th>ملاحظات</th><th>إجراءات</th></tr></thead><tbody id="tbody"></tbody></table></div><div class="foot" id="shown"></div></section>
+<div class="note">زر واتساب يفترض أرقامًا مصرية (يستبدل الصفر الأول بـ 20). تنبيه: نموذج توضيحي ببيانات وهمية فقط. لا ترفع سيرًا ذاتية حقيقية أو بيانات شخصية حساسة. هذه النسخة ليست نظام ATS إنتاجيًا ولا تصدر قرارات قبول أو رفض آلية.</div></main></div>
+<div class="modalback" id="modal"><div class="modal"><h2 id="mtitle">إضافة مرشح</h2><div class="form"><div class="field"><label>اسم المرشح *</label><input id="f_name" placeholder="اسم تجريبي"></div><div class="field"><label>البريد الإلكتروني</label><input id="f_email" type="email" placeholder="name@example.com"></div><div class="field"><label>الوظيفة</label><input id="f_role" list="rolelist" placeholder="اكتب اسم الوظيفة"><datalist id="rolelist"></datalist></div><div class="field"><label>المصدر</label><input id="f_source" list="srclist" placeholder="اكتب المصدر، مثال: LinkedIn"><datalist id="srclist"><option value="LinkedIn"><option value="Referral"><option value="Facebook"><option value="Job Board"><option value="Wuzzuf"></datalist></div><div class="field"><label>تاريخ التقديم</label><input id="f_date" type="date"></div><div class="field"><label>الحالة</label><select id="f_status"><option>جديد</option><option>فرز أولي</option><option>مقابلة</option><option>عرض وظيفي</option><option>مرفوض</option><option>معلق</option></select></div><div class="field"><label>رقم الهاتف *</label><input id="f_phone" type="tel" dir="ltr" placeholder="01000000000"></div><div class="field"><label>تاريخ الميلاد *</label><input id="f_dob" type="date"></div><div class="field"><label>متخرج؟ *</label><select id="f_grad"><option value="">اختر</option><option>نعم</option><option>لا</option></select></div><div class="field"><label>لديه خبرة؟ *</label><select id="f_exp"><option value="">اختر</option><option>نعم</option><option>لا</option></select></div><div class="field"><label>اللغة</label><select id="f_lang"></select></div><div class="field"><label>مستوى اللغة</label><select id="f_lvl"></select></div><div class="field"><label>المنطقة / المحافظة</label><input id="f_area" placeholder="مثال: القاهرة"></div><div class="field full"><label>ملاحظات</label><textarea id="f_notes" placeholder="أي ملاحظة عن المرشح..."></textarea></div></div><div class="modalactions"><button class="primary" onclick="add()">حفظ</button><button class="secondary" onclick="hideModal()">إلغاء</button></div></div></div><div class="modalback" id="cmodal"><div class="modal" style="width:min(380px,100%)"><h2>تأكيد الحذف</h2><div id="ctext" style="font-size:13px;line-height:1.9;color:#c9c9cf"></div><div class="modalactions"><button class="danger" id="cyes">نعم، احذف</button><button class="secondary" onclick="cclose()">إلغاء</button></div></div></div><div class="toast" id="toast"></div>
+<script>
+const $id = id => document.getElementById(id);
+
+const states=["جديد","اتصال أولي","اختبار لغة","مقابلة HR","مقابلة العمليات","عرض","تدريب","بدأ العمل","لم يرد","لم يحضر","انسحب","مرفوض"],
+cl={"جديد":"new","اتصال أولي":"screen","اختبار لغة":"screen","مقابلة HR":"interview","مقابلة العمليات":"interview","عرض":"offer","تدريب":"offer","بدأ العمل":"offer","لم يرد":"hold","لم يحضر":"rejected","انسحب":"rejected","مرفوض":"rejected"},
+OLD={"فرز أولي":"اتصال أولي","مقابلة":"مقابلة HR","عرض وظيفي":"عرض","معلق":"لم يرد"},
+LANGS=["إنجليزي","فرنسي","ألماني","إيطالي","إسباني","عربي فقط"],LVL=["A2","B1","B2","C1","C2"],GOOD=["عرض","تدريب","بدأ العمل"],
+TPL={d:"أهلاً {n}، معك فريق التوظيف بخصوص تقديمك على وظيفة {r}. هل ما زلت مهتمًا؟","مقابلة HR":"أهلاً {n}، تم تحديد مقابلة لك على وظيفة {r}. برجاء تأكيد حضورك.","لم يحضر":"أهلاً {n}، لاحظنا غيابك عن المقابلة. هل ترغب في تحديد موعد جديد؟"};
+const seed=[
+[1,"مريم أحمد","","Call Center - إنجليزي","Facebook","2026-11-02","مقابلة HR","01000000001",23,"نعم","لا","إنجليزي","B2","القاهرة"],
+[2,"عمر خالد","","Call Center - عربي","Referral","2026-11-02","اتصال أولي","01000000002",21,"لا","لا","عربي فقط","","الجيزة"],
+[3,"سارة محمود","","Call Center - فرنسي","LinkedIn","2026-11-03","اختبار لغة","01000000003",24,"نعم","لا","فرنسي","B1","القاهرة"],
+[4,"يوسف علي","","Call Center - إنجليزي","Facebook","2026-11-03","تدريب","01000000004",25,"نعم","نعم","إنجليزي","C1","القليوبية"],
+[5,"ندى إبراهيم","","Call Center - إنجليزي","Facebook","2026-11-04","جديد","01000000005",22,"لا","لا","إنجليزي","B2","الجيزة"],
+[6,"كريم حسن","","Call Center - عربي","Job Board","2026-11-04","لم يحضر","01000000006",27,"نعم","نعم","عربي فقط","","القاهرة"],
+[7,"ملك سامي","","Sales Executive","Job Board","2026-11-05","عرض","01000000007",26,"نعم","نعم","إنجليزي","B2","القليوبية"],
+[8,"آدم أشرف","","Call Center - ألماني","LinkedIn","2026-11-05","لم يرد","01000000008",25,"نعم","لا","ألماني","B1","القاهرة"]];
+function mk(a){return{id:a[0],name:a[1],email:a[2],role:a[3],source:a[4],date:a[5],status:a[6],phone:a[7],dob:(new Date().getFullYear()-a[8])+"-06-15",grad:a[9],exp:a[10],lang:a[11],lvl:a[12],area:a[13],notes:""}}
+let people=(()=>{try{return JSON.parse(localStorage.getItem("tf3_people")||"null")||seed.map(mk)}catch(e){return seed.map(mk)}})();
+function ageOf(p){if(!p.dob)return p.age||"";let b=new Date(p.dob),n=new Date();if(isNaN(b))return p.age||"";let a=n.getFullYear()-b.getFullYear();if(n<new Date(n.getFullYear(),b.getMonth(),b.getDate()))a--;return a}
+function yn(v){return v==="نعم"?'<span class="pill yes">نعم</span>':v==="لا"?'<span class="pill no">لا</span>':"—"}
+let sel=new Set(),view=[],editId=null;
+function tog(id,c){c?sel.add(id):sel.delete(id);sync()}
+function togAll(c){view.forEach(x=>c?sel.add(x.id):sel.delete(x.id));table()}
+function sync(){let n=sel.size;$id("bulkbox").style.display=n?"flex":"none";$id("bulkdel").textContent="حذف المحدد ("+n+")";$id("selall").checked=view.length>0&&view.every(x=>sel.has(x.id))}
+function ask(t,fn){$id("ctext").textContent=t;$id("cmodal").style.display="flex";$id("cyes").onclick=()=>{cclose();fn()}}
+function cclose(){$id("cmodal").style.display="none"}
+function del(id){let x=people.find(p=>p.id===id);if(x)ask("حذف المرشح \""+x.name+"\"؟ لا يمكن التراجع.",()=>{people=people.filter(p=>p.id!==id);sel.delete(id);save();render();notify("تم حذف المرشح")})}
+function delSel(){let n=sel.size;if(n)ask("حذف "+n+" مرشح محدد؟ لا يمكن التراجع.",()=>{people=people.filter(p=>!sel.has(p.id));sel.clear();save();render();notify("تم حذف المرشحين المحددين")})}
+function save(){try{localStorage.setItem("tf3_people",JSON.stringify(people));return true}catch(e){notify("تعذر الحفظ في تخزين المتصفح. صدّر نسخة Excel/CSV للاحتفاظ بالبيانات.",5000);return false}}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function syncRoles(){let rs=[...new Set(people.map(p=>p.role).filter(Boolean))],cur=$id("rf").value;$id("rf").innerHTML='<option value="">كل الوظائف</option>'+rs.map(r=>"<option>"+esc(r)+"</option>").join("");$id("rf").value=rs.includes(cur)?cur:"";$id("rolelist").innerHTML=rs.filter(r=>r!=="غير محدد").map(r=>'<option value="'+esc(r)+'">').join("")}
+function render(){syncRoles();let P=people,c=a=>P.filter(x=>a.includes(x.status)).length;
+$id("total").textContent=P.length;$id("review").textContent=c(["جديد","اتصال أولي","اختبار لغة"]);$id("interviews").textContent=c(["مقابلة HR","مقابلة العمليات"]);$id("offers").textContent=c(GOOD);
+let counts=states.map(t=>[t,c([t])]),max=Math.max(1,...counts.map(x=>x[1]));
+$id("funnel").innerHTML=counts.map(([t,n])=>`<div class="frow"><span>${t}</span><div class="track"><div class="bar" style="width:${n/max*100}%"></div></div><b>${n}</b></div>`).join("");
+let src=[...new Set(P.map(x=>x.source||"غير محدد"))].map(t=>{let l=P.filter(x=>(x.source||"غير محدد")===t);return[t,l.length,l.filter(x=>GOOD.includes(x.status)).length]}).sort((a,b)=>b[1]-a[1]),sm=Math.max(1,...src.map(x=>x[1]));
+$id("sources").innerHTML=src.map(([t,n,g])=>`<div class="src"><div><span>${esc(t)}</span><b>${n} · قبول ${g}</b></div><div class="srcbar"><span style="width:${n/sm*100}%"></span></div></div>`).join("");
+$id("latest").innerHTML=P.slice().sort((a,b)=>(b.date||"").localeCompare(a.date||"")).slice(0,4).map(x=>`<div class="lrow"><span class="av">${esc(x.name.trim().charAt(0))}</span><span class="ln">${esc(x.name)}<small>${esc(x.role)}</small></span><span class="pill ${cl[x.status]}">${x.status}</span></div>`).join("")||'<div class="muted">لا يوجد مرشحون بعد</div>';table()}
+function wa(x){let p=(x.phone||"").replace(/[^\d+]/g,"");if(!p)return"";p=p[0]==="+"?p.slice(1):p.slice(0,2)==="00"?p.slice(2):p[0]==="0"?"20"+p.slice(1):p;let t=(TPL[x.status]||TPL.d).replace("{n}",x.name).replace("{r}",x.role);return'<a class="sm wa" target="_blank" rel="noopener" href="https://wa.me/'+p+'?text='+encodeURIComponent(t)+'">واتساب</a>'}
+function table(){let q=$id("search").value.toLowerCase(),F=k=>$id(k).value,mn=parseInt(F("amin"),10),mx=parseInt(F("amax"),10);
+let arr=people.filter(x=>{let a=ageOf(x);return(x.name.toLowerCase().includes(q)||x.role.toLowerCase().includes(q)||(x.phone||"").includes(q))&&(!F("sf")||x.status===F("sf"))&&(!F("rf")||x.role===F("rf"))&&(!F("lf")||x.lang===F("lf"))&&(!F("lvf")||(x.lvl&&LVL.indexOf(x.lvl)>=LVL.indexOf(F("lvf"))))&&(!F("gf")||x.grad===F("gf"))&&(!F("ef")||x.exp===F("ef"))&&(!(mn>0)||(a!==""&&a>=mn))&&(!(mx>0)||(a!==""&&a<=mx))});view=arr;
+$id("tbody").innerHTML=arr.length?arr.map(x=>`<tr><td class="c-chk"><input type="checkbox" ${sel.has(x.id)?"checked":""} onchange="tog(${x.id},this.checked)"></td><td class="c-name full"><div class="person">${esc(x.name)}</div><div class="email">${esc(x.email||"—")}</div></td><td data-label="الهاتف" dir="ltr" style="text-align:right">${esc(x.phone||"—")}</td><td data-label="العمر">${esc(ageOf(x)||"—")}</td><td data-label="متخرج؟">${yn(x.grad)}</td><td data-label="خبرة؟">${yn(x.exp)}</td><td data-label="اللغة">${esc((x.lang||"—")+(x.lvl?" "+x.lvl:""))}</td><td data-label="المنطقة">${esc(x.area||"—")}</td><td data-label="الوظيفة">${esc(x.role)}</td><td data-label="المصدر">${esc(x.source)}</td><td data-label="التقديم">${esc(x.date||"—")}</td><td data-label="الحالة"><select class="stsel ${cl[x.status]}" onchange="change(${x.id},this.value)">${states.map(t=>`<option ${t===x.status?"selected":""}>${t}</option>`).join("")}</select></td><td data-label="ملاحظات" class="full"><div class="note-cell" title="${esc(x.notes||"")}">${esc(x.notes||"—")}</div></td><td class="c-act full">${wa(x)}<a class="sm tel" href="tel:${esc(x.phone||"")}">اتصال</a><button class="secondary sm" onclick="showModal(${x.id})">تعديل</button> <button class="danger sm" onclick="del(${x.id})">حذف</button></td></tr>`).join(""):'<tr><td class="full" colspan="14" style="padding:25px;text-align:center;color:#8b8b93">لا توجد نتائج</td></tr>';
+$id("shown").textContent=`عرض ${arr.length} من ${people.length} مرشحين`;sync()}
+function resetF(){["search","sf","rf","lf","lvf","gf","ef","amin","amax"].forEach(k=>$id(k).value="");table()}
+function bulkSt(){let t=$id("bulkst").value,n=sel.size;if(!n||!t)return;people.forEach(p=>{if(sel.has(p.id))p.status=t});save();render();notify("تم تغيير حالة "+n+" مرشح إلى «"+t+"»")}
+function initSel(){const o=(a,h)=>'<option value="">'+h+'</option>'+a.map(x=>"<option>"+x+"</option>").join(""),st=states.map(t=>"<option>"+t+"</option>").join("");
+$id("sf").innerHTML=o(states,"كل الحالات");$id("lf").innerHTML=o(LANGS,"كل اللغات");$id("lvf").innerHTML=o(LVL,"المستوى من");$id("bulkst").innerHTML=st;$id("f_status").innerHTML=st;$id("f_lang").innerHTML=o(LANGS,"اختر");$id("f_lvl").innerHTML=o(LVL,"اختر")}
+function change(id,s){let x=people.find(p=>p.id===id);if(x){x.status=s;save();render();notify("تم تحديث حالة المرشح")}}
+function showModal(id){editId=id||null;let x=id?people.find(p=>p.id===id):{},f=(k,v)=>$id(k).value=v==null?"":v;$id("mtitle").textContent=id?"تعديل بيانات المرشح":"إضافة مرشح";f("f_name",x.name);f("f_email",x.email);f("f_role",x.role!=="غير محدد"?x.role:"");f("f_source",x.source!=="غير محدد"?x.source:"");f("f_date",id?x.date:new Date().toISOString().slice(0,10));f("f_status",x.status||"جديد");f("f_phone",x.phone);f("f_dob",x.dob);f("f_grad",x.grad);f("f_exp",x.exp);f("f_lang",x.lang);f("f_lvl",x.lvl);f("f_area",x.area);f("f_notes",x.notes);$id("modal").style.display="flex"}function hideModal(){$id("modal").style.display="none"}
+function add(){let v=k=>$id(k).value.trim(),n=v("f_name"),e=v("f_email"),ph=v("f_phone"),db=v("f_dob"),ag=db?ageOf({dob:db}):NaN;
+if(!n){notify("أدخل اسم المرشح");return}if(!/^\+?[0-9\s-]{8,15}$/.test(ph)){notify("أدخل رقم هاتف صحيح");return}if(!(ag>=16&&ag<=70)){notify("أدخل تاريخ ميلاد صحيحًا (العمر 16 - 70)");return}if(!v("f_grad")){notify("حدد هل المرشح متخرج");return}if(!v("f_exp")){notify("حدد هل لديه خبرة");return}if(e&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)){notify("راجع البريد الإلكتروني");return}
+let dup=people.find(p=>p.phone===ph&&p.id!==editId);if(dup){notify("الرقم مسجل مسبقًا: "+dup.name+" ("+dup.status+")",4500);return}
+let d={name:n,email:e,role:v("f_role")||"غير محدد",source:v("f_source")||"غير محدد",date:v("f_date"),status:v("f_status"),phone:ph,dob:db,grad:v("f_grad"),exp:v("f_exp"),lang:v("f_lang"),lvl:v("f_lvl"),area:v("f_area"),notes:v("f_notes")};
+if(editId){let x=people.find(p=>p.id===editId);if(x){Object.assign(x,d);delete x.age}save();render();hideModal();notify("تم حفظ التعديلات")}else{people.unshift(Object.assign({id:Date.now()},d));save();render();hideModal();notify("تمت إضافة المرشح")}}
+const COLS=["الاسم","رقم الهاتف","تاريخ الميلاد","العمر","متخرج","لديه خبرة","اللغة","المستوى","المنطقة","البريد الإلكتروني","الوظيفة","المصدر","تاريخ التقديم","الحالة","ملاحظات"];
+function rowsData(){return people.map(p=>[p.name,p.phone||"",p.dob||"",ageOf(p),p.grad||"",p.exp||"",p.lang||"",p.lvl||"",p.area||"",p.email||"",p.role,p.source,p.date||"",p.status,p.notes||""])}
+function fname(){return "TalentFlow_Candidates_"+new Date().toISOString().slice(0,10)}
+async function dl(blob,name){try{let d=window.claude&&await claude.use("downloads");if(d){await d.save({filename:name,data:blob});notify("تم التصدير: "+name);return}}catch(e){if(e&&e.code==="declined")return;notify("تعذّر التصدير ("+(e&&e.code||"خطأ")+")",4500);return}
+let url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);notify("تم التصدير: "+name)}
+function csv(){let rows=[COLS,...rowsData()],txt="\ufeff"+rows.map((r,i)=>r.map((v,j)=>{v=String(v??"");if(i&&j===1&&v)v='="'+v+'"';return '"'+v.replace(/"/g,'""')+'"'}).join(",")).join("\r\n");dl(new Blob([txt],{type:"text/csv;charset=utf-8"}),fname()+".csv")}
+function crc32(b){let t=crc32.t;if(!t){t=crc32.t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}}let r=-1;for(let i=0;i<b.length;i++)r=t[(r^b[i])&255]^(r>>>8);return(r^-1)>>>0}
+function zip(files){let enc=new TextEncoder(),parts=[],cd=[],off=0;
+for(const [name,txt] of files){let nb=enc.encode(name),db=enc.encode(txt),crc=crc32(db);
+let h=new DataView(new ArrayBuffer(30));h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint16(6,0x0800,true);h.setUint16(12,0x21,true);h.setUint32(14,crc,true);h.setUint32(18,db.length,true);h.setUint32(22,db.length,true);h.setUint16(26,nb.length,true);
+parts.push(new Uint8Array(h.buffer),nb,db);
+let c=new DataView(new ArrayBuffer(46));c.setUint32(0,0x02014b50,true);c.setUint16(4,20,true);c.setUint16(6,20,true);c.setUint16(8,0x0800,true);c.setUint16(14,0x21,true);c.setUint32(16,crc,true);c.setUint32(20,db.length,true);c.setUint32(24,db.length,true);c.setUint16(28,nb.length,true);c.setUint32(42,off,true);
+cd.push(new Uint8Array(c.buffer),nb);off+=30+nb.length+db.length}
+let cds=cd.reduce((a,x)=>a+x.length,0),e=new DataView(new ArrayBuffer(22));e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,cds,true);e.setUint32(16,off,true);
+let all=[...parts,...cd,new Uint8Array(e.buffer)],out=new Uint8Array(all.reduce((a,x)=>a+x.length,0)),pos=0;all.forEach(x=>{out.set(x,pos);pos+=x.length});return out}
+function xe(v){return String(v).replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g,"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function xlsxBytes(){let data=rowsData(),W=[22,16,14,8,10,12,12,10,14,28,22,14,14,14,40],last=String.fromCharCode(64+COLS.length),
+rowsXml=[COLS,...data].map((r,i)=>'<row r="'+(i+1)+'">'+r.map((v,j)=>{let ref=String.fromCharCode(65+j)+(i+1);if(typeof v==="number")return '<c r="'+ref+'"><v>'+v+'</v></c>';return '<c r="'+ref+'" t="inlineStr"'+(i?"":' s="1"')+'><is><t xml:space="preserve">'+xe(v)+'</t></is></c>'}).join("")+'</row>').join(""),
+sheet='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView rightToLeft="1" workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><cols>'+W.map((w,i)=>'<col min="'+(i+1)+'" max="'+(i+1)+'" width="'+w+'" customWidth="1"/>').join("")+'</cols><sheetData>'+rowsXml+'</sheetData><autoFilter ref="A1:'+last+(data.length+1)+'"/></worksheet>',
+H='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',NS='xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"',R='http://schemas.openxmlformats.org/officeDocument/2006/relationships',PR='http://schemas.openxmlformats.org/package/2006/relationships';
+return zip([
+["[Content_Types].xml",H+'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>'],
+["_rels/.rels",H+'<Relationships xmlns="'+PR+'"><Relationship Id="rId1" Type="'+R+'/officeDocument" Target="xl/workbook.xml"/></Relationships>'],
+["xl/workbook.xml",H+'<workbook '+NS+' xmlns:r="'+R+'"><sheets><sheet name="المرشحون" sheetId="1" r:id="rId1"/></sheets></workbook>'],
+["xl/_rels/workbook.xml.rels",H+'<Relationships xmlns="'+PR+'"><Relationship Id="rId1" Type="'+R+'/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="'+R+'/styles" Target="styles.xml"/></Relationships>'],
+["xl/styles.xml",H+'<styleSheet '+NS+'><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Calibri"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF172554"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="2"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>'],
+["xl/worksheets/sheet1.xml",sheet]])}
+function xlsx(){dl(new Blob([xlsxBytes()],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}),fname()+".xlsx")}
+const ALIAS={name:["الاسم","اسم المرشح","المرشح","name","candidate"],phone:["رقم الهاتف","الهاتف","رقم التليفون","التليفون","phone","mobile"],age:["العمر","السن","age"],grad:["متخرج","graduate"],exp:["لديه خبرة","خبرة","experience"],email:["البريد الإلكتروني","البريد","email"],role:["الوظيفة","role","job"],source:["المصدر","source"],date:["تاريخ التقديم","التاريخ","date"],status:["الحالة","status"],notes:["ملاحظات","notes"],dob:["تاريخ الميلاد","الميلاد","dob","birth"],lang:["اللغة","language"],lvl:["المستوى","level"],area:["المنطقة","المحافظة","area"]};
+function norm(h){return String(h==null?"":h).replace(/[؟?*]/g,"").trim().toLowerCase()}
+async function inflateRaw(u8){let ds=new DecompressionStream("deflate-raw"),w=ds.writable.getWriter();w.write(u8);w.close();return new Uint8Array(await new Response(ds.readable).arrayBuffer())}
+async function unzip(buf){let u=new Uint8Array(buf),dv=new DataView(buf),e=u.length-22;while(e>=0&&dv.getUint32(e,true)!==0x06054b50)e--;if(e<0)throw new Error("zip");
+let n=dv.getUint16(e+10,true),p=dv.getUint32(e+16,true),files={},dec=new TextDecoder();
+for(let i=0;i<n;i++){let method=dv.getUint16(p+10,true),csz=dv.getUint32(p+20,true),nl=dv.getUint16(p+28,true),el=dv.getUint16(p+30,true),cl=dv.getUint16(p+32,true),lo=dv.getUint32(p+42,true),name=dec.decode(u.subarray(p+46,p+46+nl));
+let ln=dv.getUint16(lo+26,true),le=dv.getUint16(lo+28,true),st=lo+30+ln+le,data=u.subarray(st,st+csz);
+if(/^xl\/(worksheets\/sheet\d+|sharedStrings)\.xml$/.test(name))files[name]=dec.decode(method===0?data:await inflateRaw(data));
+p+=46+nl+el+cl}return files}
+function xlsxRows(files){let dp=new DOMParser(),ss=[];
+if(files["xl/sharedStrings.xml"]){let d=dp.parseFromString(files["xl/sharedStrings.xml"],"application/xml");ss=[...d.getElementsByTagName("si")].map(si=>[...si.getElementsByTagName("t")].map(t=>t.textContent).join(""))}
+let key=files["xl/worksheets/sheet1.xml"]?"xl/worksheets/sheet1.xml":Object.keys(files).find(k=>k.includes("worksheets/"));if(!key)throw new Error("sheet");
+let d=dp.parseFromString(files[key],"application/xml"),rows=[];
+for(const r of d.getElementsByTagName("row")){let row=[];for(const c of r.getElementsByTagName("c")){let ref=c.getAttribute("r")||"",col=0;for(const ch of ref.replace(/\d+/g,""))col=col*26+ch.charCodeAt(0)-64;col=col>0?col-1:row.length;let t=c.getAttribute("t"),v="";
+if(t==="inlineStr")v=[...c.getElementsByTagName("t")].map(x=>x.textContent).join("");else{let ve=c.getElementsByTagName("v")[0];v=ve?ve.textContent:"";if(t==="s")v=ss[+v]!=null?ss[+v]:""}
+row[col]=v}rows.push(Array.from(row,x=>x==null?"":x))}return rows}
+function csvRows(txt){txt=txt.replace(/^\ufeff/,"");let first=txt.split(/\r?\n/)[0],d=[",",";","\t"].map(c=>[c,first.split(c).length]).sort((a,b)=>b[1]-a[1])[0][0],rows=[],row=[],f="",q=false;
+for(let i=0;i<txt.length;i++){let c=txt[i];if(q){if(c==='"'){if(txt[i+1]==='"'){f+='"';i++}else q=false}else f+=c}else if(c==='"')q=true;else if(c===d){row.push(f);f=""}else if(c==="\n"||c==="\r"){if(c==="\r"&&txt[i+1]==="\n")i++;row.push(f);rows.push(row);row=[];f=""}else f+=c}
+if(f!==""||row.length){row.push(f);rows.push(row)}return rows}
+function yesno(v){v=String(v).trim().toLowerCase();return["نعم","yes","y","true","1"].includes(v)?"نعم":["لا","no","n","false","0"].includes(v)?"لا":""}
+function normDate(v){v=String(v).trim();if(!v)return"";if(/^\d{5}$/.test(v))return new Date(Date.UTC(1899,11,30)+(+v)*864e5).toISOString().slice(0,10);let m=v.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})$/);if(m)return m[3]+"-"+m[2].padStart(2,"0")+"-"+m[1].padStart(2,"0");return v.slice(0,10)}
+async function imp(inp){let f=inp.files&&inp.files[0];if(!f)return;
+try{let buf=await f.arrayBuffer(),u=new Uint8Array(buf),rows;
+if(u[0]===0x50&&u[1]===0x4B)rows=xlsxRows(await unzip(buf));else{let t=new TextDecoder("utf-8").decode(buf);if(t.includes("\ufffd"))t=new TextDecoder("windows-1256").decode(buf);rows=csvRows(t)}
+inp.value="";
+rows=rows.filter(r=>r.some(x=>String(x==null?"":x).trim()));if(rows.length<2){notify("الملف فارغ أو لا يحتوي صفوفًا",3500);return}
+let hdr=rows[0].map(norm),idx={};for(const k in ALIAS)idx[k]=hdr.findIndex(h=>ALIAS[k].map(norm).includes(h));
+if(idx.name<0){notify("لم أجد عمود \"الاسم\" في الملف. استخدم ملفًا مصدّرًا من البرنامج",5000);return}
+let out=[],dups=0,seen=new Set(people.map(p=>p.phone||p.name+"|"+p.date)),base=Date.now();
+for(const r of rows.slice(1)){let g=k=>idx[k]>=0&&r[idx[k]]!=null?String(r[idx[k]]).trim():"",name=g("name");if(!name)continue;
+let ph=g("phone").replace(/^=\s*"?/,"").replace(/"$/,"").replace(/[^\d+]/g,"");if(/^1\d{9}$/.test(ph))ph="0"+ph;
+let ag=parseInt(g("age"),10);if(!(ag>0&&ag<120))ag="";
+let st=g("status"),o={id:base+out.length,name:name,email:g("email"),role:g("role")||"غير محدد",source:g("source")||"غير محدد",date:normDate(g("date")),status:states.includes(st)?st:(OLD[st]||"جديد"),phone:ph,age:ag,dob:normDate(g("dob")),lang:g("lang"),lvl:g("lvl"),area:g("area"),grad:yesno(g("grad")),exp:yesno(g("exp")),notes:g("notes")},key=o.phone||o.name+"|"+o.date;
+if(seen.has(key)){dups++;continue}seen.add(key);out.push(o)}
+if(!out.length){notify(dups?"كل المرشحين في الملف موجودون بالفعل ("+dups+")":"لا توجد صفوف صالحة للاستيراد",4500);return}
+people=[...out,...people];save();render();notify("تم استيراد "+out.length+" مرشح"+(dups?" — تم تخطي "+dups+" مكرر":""),5000)
+}catch(e){inp.value="";notify("تعذّر قراءة الملف. استخدم ملف Excel (.xlsx) أو CSV",5000)}}
+let tt;function notify(t,ms){$id("toast").textContent=t;$id("toast").style.display="block";clearTimeout(tt);tt=setTimeout(()=>$id("toast").style.display="none",ms||2200)}
+initSel();render();
+</script></body></html>
